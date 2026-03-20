@@ -1,0 +1,6 @@
+Ötletek:
+- Autósiskola tanulóinak nyilvántartása (tanulók adatai [név, születés, anyja neve stb...], vizsgák, pénz befizetések, okmányok)
+- Színház / koncert jegyeinek nyilvántartása (vásárlók neve, helye [sor, szék / állóhely, vip], jegy ára, jegy érvényessége)
+- Autó szakszervíz (autó tulajdonosának adatai, autó rendszáma, probléma megállípítása, tervezett javítási idő, javítási költség)
+- Lovarda bértartói (tulajdonos adatai, ló adatai [név, fajta, kor, nem], ár, fizetési határidő, külön igények [opcionális])
+- Röplabda bajokságok (csapatok nevei, játékosok nevei, edző, meccsek száma, pontok száma)
