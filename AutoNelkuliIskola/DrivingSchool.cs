@@ -43,7 +43,7 @@ public class DrivingSchool
                 else
                 {
                     instructors[instructorName].Add(learner);
-                    Console.WriteLine($"Tanuló felvéve oktatóhoz '{instructorName}'.");
+                    Console.WriteLine($"Tanuló '{learner.LearnerName}' felvéve oktatóhoz '{instructorName}'.");
                 }
             }
            
