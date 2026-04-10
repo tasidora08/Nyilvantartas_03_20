@@ -6,8 +6,6 @@ namespace AutoNelkuliIskola;
 public class DrivingSchool
 {
     private string drivingSchoolName;
-    private int numberOfInstructors;
-    private int numberOfLearners;
 
     private Dictionary<string, List<Learner>> instructors;
 
@@ -94,6 +92,8 @@ public class DrivingSchool
 
         Console.WriteLine($"'{learner.LearnerName}' nevű tanuló nem található!");
     }
+
+
     public void AddNewInstructor(string instructorName)
     { 
         if(!instructors.ContainsKey(instructorName))
@@ -119,6 +119,8 @@ public class DrivingSchool
         }
     }
 
+
+
     public void ListLearnersOfInstructors(string instructorName)
     {
         if (instructors[instructorName].Count == 0)
@@ -133,7 +135,10 @@ public class DrivingSchool
             instructors[instructorName].ForEach(learner => Console.WriteLine($"Név: {learner.LearnerName} \nÉletkor: {learner.Age} \nSzül. Dátum: {learner.BornDate} \nAnyja neve: {learner.MotherName}\n{new string('-', 30)}"));
         }
     }
-
+    public Dictionary<string, List<Learner>> ListAllInstructorsWithLearners()
+    {
+        return instructors;
+    }
 
     private int GetNumberOfLearners(Dictionary<string, List<Learner>> learners)
     {
@@ -147,6 +152,29 @@ public class DrivingSchool
     private int GetNumberOfInstructors(Dictionary<string, List<Learner>> learners)
     {
         return learners.Count;
+    }
+
+
+    public void SaveToFile(string fileName)
+    {
+        string fullFileName = fileName.EndsWith(".txt") ? fileName : fileName + ".txt";
+
+        File.WriteAllText(fullFileName, "");
+
+        foreach (KeyValuePair<string, List<Learner>> item in instructors)
+        {
+            File.AppendAllText(fullFileName, $"Oktató;{item.Key}");
+            item.Value.ForEach(learner =>
+                File.AppendAllText(fullFileName,
+                    $"\nTanuló;{learner.LearnerName};{learner.Age};{learner.BornDate};{learner.MotherName}"));
+            File.AppendAllText(fullFileName,"\n");
+        }
+
+        Console.WriteLine($"Fájl mentése '{fullFileName}' néven sikeres!");
+    }
+    public void LoadFromFile(string fileName)
+    {
+
     }
 
 }
