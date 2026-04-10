@@ -20,7 +20,7 @@ public class DrivingSchool
     public int NumberOfLearners => GetNumberOfLearners(instructors);
 
 
-
+    //Data Handling
     public void AddNewLearner(string instructorName, Learner learner)
     {
         if (instructors.ContainsKey(instructorName))
@@ -100,6 +100,7 @@ public class DrivingSchool
         {
             List<Learner> learners = new List<Learner>();
             instructors.Add(instructorName, learners);
+            Console.WriteLine($"{instructorName} oktató felvéve");
         }
         else
         {
@@ -120,7 +121,7 @@ public class DrivingSchool
     }
 
 
-
+    //List Mehtods
     public void ListLearnersOfInstructors(string instructorName)
     {
         if (instructors[instructorName].Count == 0)
@@ -154,7 +155,7 @@ public class DrivingSchool
         return learners.Count;
     }
 
-
+    //File Handling
     public void SaveToFile(string fileName)
     {
         string fullFileName = fileName.EndsWith(".txt") ? fileName : fileName + ".txt";
@@ -174,7 +175,38 @@ public class DrivingSchool
     }
     public void LoadFromFile(string fileName)
     {
+        string fullFileName = fileName.EndsWith(".txt") ? fileName : fileName + ".txt";
 
+        if (!File.Exists(fullFileName))
+        {
+            Console.WriteLine($"Nem található fájl '{fullFileName}' néven!");
+            return;
+        }
+
+        string currentInstructor = null;
+
+        foreach (string line in File.ReadAllLines(fullFileName))
+        {
+            if (string.IsNullOrWhiteSpace(line)) continue;
+
+            string[] parts = line.Split(';');
+
+            if (parts[0] == "Oktató")
+            {
+                currentInstructor = parts[1];
+                AddNewInstructor(currentInstructor);
+            }
+            else if (parts[0] == "Tanuló" && currentInstructor != null)
+            {
+                AddNewLearner(currentInstructor, new Learner(
+                    learnerName: parts[1],
+                    bornDate: DateOnly.Parse(parts[3]),
+                    motherName: parts[4]
+                ));
+            }
+        }
+
+        Console.WriteLine($"Fájl betöltése '{fullFileName}' névről sikeres!");
     }
 
 }

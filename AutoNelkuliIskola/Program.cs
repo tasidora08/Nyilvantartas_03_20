@@ -4,7 +4,10 @@ class Program
 {
     static void Main(string[] args)
     {
-        Console.WriteLine("Hello, World!");
+        //DrivingSchool iskola = new DrivingSchool("Autóóóó");
+
+        //iskola.LoadFromFile("mentés");
+
 
         DrivingSchool iskola = new DrivingSchool("Autósikola 2000");
         Console.WriteLine(iskola.DrivingSchoolName);
@@ -23,10 +26,10 @@ class Program
         Console.WriteLine("VÉGE");
         Console.WriteLine();
 
-        Learner tanulo1 = new Learner("Ábel",new DateOnly(2000,02,19), "anya");
-        Learner tanulo2 = new Learner("Pista",new DateOnly(2000,02,19), "anya");
-        Learner tanulo3 = new Learner("Lali",new DateOnly(2000,02,19), "anya");
-        Learner tanulo4 = new Learner("Géza",new DateOnly(2000,02,19), "anya");
+        Learner tanulo1 = new Learner("Ábel", new DateOnly(2000, 02, 19), "anya");
+        Learner tanulo2 = new Learner("Pista", new DateOnly(2000, 02, 19), "anya");
+        Learner tanulo3 = new Learner("Lali", new DateOnly(2000, 02, 19), "anya");
+        Learner tanulo4 = new Learner("Géza", new DateOnly(2000, 02, 19), "anya");
 
         Console.WriteLine($"Név: {tanulo1.LearnerName} \nÉletkor: {tanulo1.Age} \nSzül. Dátum: {tanulo1.BornDate} \nAnyja neve: {tanulo1.MotherName}");
 
@@ -38,7 +41,7 @@ class Program
 
         iskola.DeleteLearner(tanulo1);
 
-        iskola.AddNewLearner("Nagy Laci", tanulo1 );
+        iskola.AddNewLearner("Nagy Laci", tanulo1);
 
         iskola.UpdateLearner(tanulo1, "Tök Ödön");
         iskola.AddNewLearner("Tök Ödön", tanulo2);
