@@ -237,6 +237,16 @@ public class DrivingSchool
         return learners.Count;
     }
 
+    public List<Learner> GetAllLearners()
+    {
+        return allLearners;
+    }
+
+    public List<string> GetAllInstructors()
+    {
+        return instructors.Keys.ToList();
+    }
+
     //File Handling
     public void SaveToFile(string fileName)
     {
@@ -295,8 +305,8 @@ public class DrivingSchool
         Console.WriteLine($"Fájl betöltése '{fullFileName}' névről sikeres!");
     }
 
-        // Tanuló keresése név alapján
-        public Learner GetLearnerByName(string name)
+    // Tanuló keresése név alapján
+    public Learner GetLearnerByName(string name)
         {
         return allLearners.FirstOrDefault(x => x.LearnerName == name);
         }

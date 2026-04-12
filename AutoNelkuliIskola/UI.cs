@@ -150,6 +150,7 @@ public class UI
                     Console.Write("Oktató neve: ");
                     string OktatoLista = Console.ReadLine();
                     iskola.ListLearnersOfInstructors(OktatoLista);
+                    Console.ReadKey();
                     break;
                 case ConsoleKey.Escape:
                     fut = false;
