@@ -53,9 +53,12 @@ public class UI
                 case ConsoleKey.NumPad2:
                     Console.WriteLine("\nTanuló törlése");
                     Console.WriteLine("-".PadLeft(49, '-'));
-                    Console.Write("Tanuló neve: ");
+                    Console.WriteLine("Tanulók:");
+                    iskola.GetAllLearners().ForEach(t => Console.WriteLine($"\t{t.LearnerName}"));
+                    Console.WriteLine("-".PadLeft(29, '-'));
+                    Console.Write("Törölni kívánt tanuló neve: ");
                     string nevTorles = Console.ReadLine();
-                    Console.Write("Tanuló anyja neve: ");
+                    Console.Write("Törölni kívánt tanuló anyja neve: ");
                     string anyjaNeveTorles = Console.ReadLine();
                     Learner tanuloTorles = new Learner(nevTorles, DateOnly.MinValue, anyjaNeveTorles);
                     iskola.DeleteLearner(tanuloTorles);
@@ -65,7 +68,10 @@ public class UI
                 case ConsoleKey.NumPad3:
                     Console.WriteLine("\nTanuló adatainak módosítása");
                     Console.WriteLine("-".PadLeft(49, '-'));
-                    Console.Write("Tanuló neve: ");
+                    Console.WriteLine("Tanulók:");
+                    iskola.GetAllLearners().ForEach(t => Console.WriteLine($"\t{t.LearnerName}"));
+                    Console.WriteLine("-".PadLeft(29, '-'));
+                    Console.Write("Módosítani kívánt tanuló neve: ");
                     string nevModosit = Console.ReadLine();
                     Console.Write("Új név (Enter ha nem változik): ");
                     string ujNev = Console.ReadLine();
@@ -95,6 +101,12 @@ public class UI
                 case ConsoleKey.NumPad4:
                     Console.WriteLine("\nTanuló hozzáadása egy oktatóhoz");
                     Console.WriteLine("-".PadLeft(49, '-'));
+                    Console.WriteLine("Tanulók:");
+                    iskola.GetAllLearners().ForEach(t => Console.WriteLine($"\t{t.LearnerName}"));
+                    Console.WriteLine("-".PadLeft(29, '-'));
+                    Console.WriteLine("Oktatók:");
+                    iskola.GetAllInstructors().ForEach(o => Console.WriteLine($"\t{o}"));
+                    Console.WriteLine("-".PadLeft(29, '-'));
                     Console.Write("Tanuló neve: ");
                     string tanuloNeve = Console.ReadLine();
                     Console.Write("Oktató neve: ");
@@ -107,7 +119,10 @@ public class UI
                 case ConsoleKey.NumPad5:
                     Console.WriteLine("\nTanuló törlése");
                     Console.WriteLine("-".PadLeft(49, '-'));
-                    Console.Write("Tanuló neve: ");
+                    Console.WriteLine("Tanulók:");
+                    iskola.GetAllLearners().ForEach(t => Console.WriteLine($"\t{t.LearnerName}"));
+                    Console.WriteLine("-".PadLeft(29, '-'));
+                    Console.Write("Törölni kívánt tanuló neve: ");
                     string tanuloNeveT = Console.ReadLine();
                     Learner tanuloTorol = iskola.GetLearnerByName(tanuloNeveT);
                     iskola.DeleteLearner(tanuloTorol);
