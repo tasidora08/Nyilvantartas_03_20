@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.36616.10 d17.14
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutoNelkuliIskolaWPF", "AutoNelkuliIskolaWPF.csproj", "{6EA84CB0-FAF8-4487-A82E-C18121EB9B3B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6EA84CB0-FAF8-4487-A82E-C18121EB9B3B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6EA84CB0-FAF8-4487-A82E-C18121EB9B3B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6EA84CB0-FAF8-4487-A82E-C18121EB9B3B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6EA84CB0-FAF8-4487-A82E-C18121EB9B3B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {649F26D5-A9D5-4C3B-9A8B-7A8C523E9AF2}
+	EndGlobalSection
+EndGlobal

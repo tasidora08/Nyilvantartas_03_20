@@ -49,6 +49,7 @@ public class DrivingSchool
                 if (inDict != null)
                 {
                     instructor.Value.Remove(inDict);
+                    Console.WriteLine($"'{learner.LearnerName}' törölve '{instructor.Key}' oktatótól!");
                     break;
                 }
             }
