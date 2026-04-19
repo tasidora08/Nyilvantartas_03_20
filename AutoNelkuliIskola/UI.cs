@@ -117,6 +117,11 @@ public class UI
                 case ConsoleKey.NumPad5:
                     Console.WriteLine("\nTanuló áthelyezése másik oktatóhoz");
                     Console.WriteLine("-".PadLeft(49, '-'));
+                    iskola.GetAllLearners().ForEach(t => Console.WriteLine($"\t{t.LearnerName}"));
+                    Console.WriteLine("-".PadLeft(29, '-'));
+                    Console.WriteLine("Oktatók:");
+                    iskola.GetAllInstructors().ForEach(o => Console.WriteLine($"\t{o}"));
+                    Console.WriteLine("-".PadLeft(29, '-'));
                     Console.Write("Tanuló neve: ");
                     string tanuloAthelyezese = Console.ReadLine();
                     Learner tanuloAthelyez = iskola.GetLearnerByName(tanuloAthelyezese);
@@ -138,6 +143,9 @@ public class UI
                 case ConsoleKey.NumPad7:
                     Console.WriteLine("\nOktató törlése");
                     Console.WriteLine("-".PadLeft(49, '-'));
+                    Console.WriteLine("Oktatók:");
+                    iskola.GetAllInstructors().ForEach(o => Console.WriteLine($"\t{o}"));
+                    Console.WriteLine("-".PadLeft(29, '-'));
                     Console.Write("Oktató neve: ");
                     string oktatoTorles = Console.ReadLine();
                     iskola.DeleteInstructor(oktatoTorles);
@@ -147,6 +155,9 @@ public class UI
                 case ConsoleKey.NumPad8:
                     Console.WriteLine("\nOktató tanulóinak listája");
                     Console.WriteLine("-".PadLeft(49, '-'));
+                    Console.WriteLine("Oktatók:");
+                    iskola.GetAllInstructors().ForEach(o => Console.WriteLine($"\t{o}"));
+                    Console.WriteLine("-".PadLeft(29, '-'));
                     Console.Write("Oktató neve: ");
                     string OktatoLista = Console.ReadLine();
                     iskola.ListLearnersOfInstructors(OktatoLista);
