@@ -4,13 +4,14 @@ class Program
 {
     static void Main(string[] args)
     {
-        //DrivingSchool iskola = new DrivingSchool("Autóóóó");
 
-        //iskola.LoadFromFile("mentés");
+        //DrivingSchool iskolaa = new DrivingSchool("Autóóóó");
+
+        //iskolaa.LoadFromFile("mentés");
 
 
         DrivingSchool iskola = new DrivingSchool("Autósikola 2000");
-        Console.WriteLine(iskola.DrivingSchoolName);
+        //Console.WriteLine(iskola.DrivingSchoolName);
 
         Learner tanulo1 = new Learner("Ábel", new DateOnly(2000, 02, 19), "anya");
         Learner tanulo2 = new Learner("Pista", new DateOnly(2010, 02, 09), "Mutter");
@@ -40,15 +41,17 @@ class Program
 
 
 
-        foreach (KeyValuePair<string, List<Learner>> item in iskola.ListAllInstructorsWithLearners())
-        {
-            Console.WriteLine($"Oktató: {item.Key}");
-            item.Value.ForEach(x => Console.WriteLine($"  - {x.LearnerName} - {x.Age} - {x.BornDate} - {x.MotherName}"));
-        }
+        //foreach (KeyValuePair<string, List<Learner>> item in iskola.ListAllInstructorsWithLearners())
+        //{
+        //    Console.WriteLine($"Oktató: {item.Key}");
+        //    item.Value.ForEach(x => Console.WriteLine($"  - {x.LearnerName} - {x.Age} - {x.BornDate} - {x.MotherName}"));
+        //}
 
-       
 
-        iskola.SaveToFile("mentés");
+
+        //iskola.SaveToFile("mentés");
+
+        UI.MainMenu();
 
 
 

@@ -23,20 +23,20 @@ public class DrivingSchool
 
 
     //Data Handling
-    public void CreateLearner(Learner learner)
+    public string CreateLearner(Learner learner)
     {
         if (allLearners.Contains(learner))
         {
-            Console.WriteLine("Ez a tanuló már létezik!");
+            return "Ez a tanuló már létezik!";
         }
         else
         {
             allLearners.Add(learner);
-            Console.WriteLine($"'{learner.LearnerName}' tanuló hozzáadva a rendszerhez!");
+            return  $"'{learner.LearnerName}' tanuló hozzáadva a rendszerhez!";
         }
     }
 
-    public void DeleteLearnerData(Learner learner)
+    public string DeleteLearnerData(Learner learner)
     {
         var found = allLearners.FirstOrDefault(x => x.LearnerName == learner.LearnerName);
         if (found != null)
@@ -54,21 +54,20 @@ public class DrivingSchool
                 }
             }
 
-            Console.WriteLine($"'{learner.LearnerName}' nevű tanuló törölve a rendszerből!");
+            return $"'{learner.LearnerName}' nevű tanuló törölve a rendszerből!";
         }
         else
         {
-            Console.WriteLine($"'{learner.LearnerName}' nevű tanuló nem található!");
+            return $"'{learner.LearnerName}' nevű tanuló nem található!";
         }
     }
 
-    public void UpdateLearnerData(Learner learner, string? newName = null, DateOnly? newBornDate = null, string? newMotherName = null)
+    public string UpdateLearnerData(Learner learner, string? newName = null, DateOnly? newBornDate = null, string? newMotherName = null)
     {
         var foundInAll = allLearners.FirstOrDefault(x => x.LearnerName == learner.LearnerName);
         if (foundInAll == null)
         {
-            Console.WriteLine($"'{learner.LearnerName}' nevű tanuló nem található!");
-            return;
+            return $"'{learner.LearnerName}' nevű tanuló nem található!";
         }
 
         if (newName != null) foundInAll.LearnerName = newName;
@@ -86,10 +85,10 @@ public class DrivingSchool
             }
         }
 
-        Console.WriteLine($"'{foundInAll.LearnerName}' tanuló adatai sikeresen frissítve!");
+        return $"'{foundInAll.LearnerName}' tanuló adatai sikeresen frissítve!";
     }
 
-    public void AddNewLearner(string instructorName, Learner learner)
+    public string AddNewLearner(string instructorName, Learner learner)
     {
         if (allLearners.Contains(learner))
         {
@@ -101,27 +100,26 @@ public class DrivingSchool
 
                 if (found)
                 {
-                    Console.WriteLine($"'{learner.LearnerName}' nevű tanuló már szerepel egy másik oktatónál!");
-                    return;
+                    return $"'{learner.LearnerName}' nevű tanuló már szerepel egy másik oktatónál!";
                 }
                 else
                 {
                     instructors[instructorName].Add(learner);
-                    Console.WriteLine($"Tanuló '{learner.LearnerName}' felvéve oktatóhoz '{instructorName}'.");
+                    return $"Tanuló '{learner.LearnerName}' felvéve oktatóhoz '{instructorName}'.";
                 }
             }
             else
             {
-                Console.WriteLine($"Nem található oktató '{instructorName}' névvel!");
+                return $"Nem található oktató '{instructorName}' névvel!";
             }
         }
         else
         {
-            Console.WriteLine($"'{learner.LearnerName}' tanuló nem található a rendszerben!");
+            return $"'{learner.LearnerName}' tanuló nem található a rendszerben!";
         }
     }
 
-    public void DeleteLearner(Learner learner)
+    public string DeleteLearner(Learner learner)
     {
         foreach (var instructor in instructors)
         {
@@ -129,19 +127,17 @@ public class DrivingSchool
             if (found != null)
             {
                 instructor.Value.Remove(found);
-                Console.WriteLine($"'{learner.LearnerName}' nevű tanuló törölve!");
-                return;
+                return $"'{learner.LearnerName}' nevű tanuló törölve!";
             }
         }
-        Console.WriteLine($"'{learner.LearnerName}' nevű tanuló nem található!");
+        return $"'{learner.LearnerName}' nevű tanuló nem található!";
     }
 
-    public void UpdateLearner(Learner learner, string newInstructorName)
+    public string UpdateLearner(Learner learner, string newInstructorName)
     {
         if (!instructors.ContainsKey(newInstructorName))
         {
-            Console.WriteLine($"Nem található oktató '{newInstructorName}' névvel!");
-            return;
+            return $"Nem található oktató '{newInstructorName}' névvel!";
         }
 
         foreach (var instructor in instructors)
@@ -151,37 +147,35 @@ public class DrivingSchool
             {
                 if (instructor.Key == newInstructorName)
                 {
-                    Console.WriteLine($"'{learner.LearnerName}' már '{newInstructorName}' oktatónál van!");
-                    return;
+                    return $"'{learner.LearnerName}' már '{newInstructorName}' oktatónál van!";
                 }
 
                 instructor.Value.Remove(found);
                 instructors[newInstructorName].Add(found);
-                Console.WriteLine($"'{learner.LearnerName}' áthelyezve '{instructor.Key}' -> '{newInstructorName}'");
-                return;
+                return $"'{learner.LearnerName}' áthelyezve '{instructor.Key}' -> '{newInstructorName}'";
             }
         }
 
-        Console.WriteLine($"'{learner.LearnerName}' nevű tanuló nem található!");
+        return $"'{learner.LearnerName}' nevű tanuló nem található!";
     }
 
 
-    public void AddNewInstructor(string instructorName)
+    public string AddNewInstructor(string instructorName)
     {
         if (!instructors.ContainsKey(instructorName))
         {
             List<Learner> learners = new List<Learner>();
             instructors.Add(instructorName, learners);
-            Console.WriteLine($"{instructorName} oktató felvéve");
+            return $"{instructorName} oktató felvéve";
         }
         else
         {
-            Console.WriteLine("Ez az oktató már létezik!");
+            return "Ez az oktató már létezik!";
         }
     }
 
     
-    public void DeleteInstructor(string instructorName)
+    public string DeleteInstructor(string instructorName)
     {
         if (instructors.ContainsKey(instructorName))
         {
@@ -194,32 +188,37 @@ public class DrivingSchool
             }
 
             instructors.Remove(instructorName);
-            Console.WriteLine($"'{instructorName}' oktató törölve! A tanulói visszakerültek a rendszerbe oktató nélkül.");
+            return $"'{instructorName}' oktató törölve! A tanulói visszakerültek a rendszerbe oktató nélkül.";
         }
         else
         {
-            Console.WriteLine($"Nem található oktató '{instructorName}' névvel");
+            return $"Nem található oktató '{instructorName}' névvel";
         }
     }
 
 
     //List Methods
-    public void ListLearnersOfInstructors(string instructorName)
+    public string ListLearnersOfInstructors(string instructorName)
     {
-        if (instructors.ContainsKey(instructorName))
-        {
-            if (instructors[instructorName].Count == 0)
-            {
-                Console.WriteLine($"'{instructorName}' oktató nem rendelkezik tanulóval!");
-            }
-            else
-            {
-                Console.WriteLine(instructorName + " tanulói: ");
-                Console.WriteLine(new string('-', 30));
-                instructors[instructorName].ForEach(learner =>
-                    Console.WriteLine($"Név: {learner.LearnerName} \nÉletkor: {learner.Age} \nSzül. Dátum: {learner.BornDate} \nAnyja neve: {learner.MotherName}\n{new string('-', 30)}"));
-            }
-        }
+        if (!instructors.ContainsKey(instructorName))
+            return $"'{instructorName}' oktató nem található!";
+
+        var learners = instructors[instructorName];
+
+        if (learners.Count == 0)
+            return $"'{instructorName}' oktató nem rendelkezik tanulóval!";
+
+        var header = $"{instructorName} tanulói:\n{new string('-', 30)}\n";
+
+        var body = string.Join("\n", learners.Select(learner =>
+            $"Név: {learner.LearnerName}\n" +
+            $"Életkor: {learner.Age}\n" +
+            $"Szül. Dátum: {learner.BornDate}\n" +
+            $"Anyja neve: {learner.MotherName}\n" +
+            $"{new string('-', 30)}"
+        ));
+
+        return header + body;
     }
 
     public Dictionary<string, List<Learner>> ListAllInstructorsWithLearners()
@@ -237,8 +236,18 @@ public class DrivingSchool
         return learners.Count;
     }
 
+    public List<Learner> GetAllLearners()
+    {
+        return allLearners;
+    }
+
+    public List<string> GetAllInstructors()
+    {
+        return instructors.Keys.ToList();
+    }
+
     //File Handling
-    public void SaveToFile(string fileName)
+    public string SaveToFile(string fileName)
     {
         string fullFileName = fileName.EndsWith(".txt") ? fileName : fileName + ".txt";
 
@@ -253,17 +262,16 @@ public class DrivingSchool
             File.AppendAllText(fullFileName, "\n");
         }
 
-        Console.WriteLine($"Fájl mentése '{fullFileName}' néven sikeres!");
+        return $"Fájl mentése '{fullFileName}' néven sikeres!";
     }
 
-    public void LoadFromFile(string fileName)
+    public string LoadFromFile(string fileName)
     {
         string fullFileName = fileName.EndsWith(".txt") ? fileName : fileName + ".txt";
 
         if (!File.Exists(fullFileName))
         {
-            Console.WriteLine($"Nem található fájl '{fullFileName}' néven!");
-            return;
+            return $"Nem található fájl '{fullFileName}' néven!";
         }
 
         string currentInstructor = null;
@@ -292,6 +300,12 @@ public class DrivingSchool
             }
         }
 
-        Console.WriteLine($"Fájl betöltése '{fullFileName}' névről sikeres!");
+        return $"Fájl betöltése '{fullFileName}' névről sikeres!";
+    }
+
+    // Tanuló keresése név alapján
+    public Learner GetLearnerByName(string name)
+    {
+        return allLearners.FirstOrDefault(x => x.LearnerName == name);
     }
 }
