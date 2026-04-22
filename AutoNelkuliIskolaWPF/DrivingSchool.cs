@@ -10,12 +10,14 @@ public class DrivingSchool
 
     private Dictionary<string, List<Learner>> instructors;
     private List<Learner> allLearners;
+    private List<Learner> readyLearners;
 
     public DrivingSchool(string drivingSchoolName)
     {
         this.drivingSchoolName = drivingSchoolName;
         this.instructors = new Dictionary<string, List<Learner>>();
         this.allLearners = new List<Learner>();
+        this.readyLearners = new List<Learner>();
     }
 
     public string DrivingSchoolName { get => drivingSchoolName; set => drivingSchoolName = value; }
@@ -24,6 +26,54 @@ public class DrivingSchool
 
 
     //Data Handling
+
+    public string IsReadyForTheExam(Learner learner)
+    {
+        if(learner.DrivedHours >= 50 && learner.HasTrafficPoliceExam && learner.HasMedicalExam)
+        {
+            readyLearners.Add(learner);
+            return $"{learner.LearnerName} tanuló rendelkezik a vizsgához szükséges követleményekkel";
+        }
+        else
+        {
+            return $"{learner.LearnerName} tanuló nem elég felkészült a vizsgára!";
+        }
+    }
+
+    public string ChangeDrivedHours(Learner learner, int newDrivedHours)
+    {
+        learner.DrivedHours = newDrivedHours;
+        return $"{learner.LearnerName} tanuló vezetett órája {learner.DrivedHours} órára frissült";
+    }
+
+    public string SetMedicalExam(bool isMedicalExam, Learner learner)
+    {
+        if (isMedicalExam)
+        {
+            learner.HasMedicalExam = true;
+            return $"{learner.LearnerName} tanuló mostantól rendelkezik egészségügyi vizsgával!";
+        }
+        else
+        {
+            learner.HasMedicalExam = false;
+            return $"{learner.LearnerName} tanuló mostantól nem rendelkezik egészségügyi vizsgával!";
+        }
+    }
+
+    public string SetTrafficPoliceEXam(bool isTrafficPoliceExam, Learner learner)
+    {
+        if (isTrafficPoliceExam)
+        {
+            learner.HasTrafficPoliceExam = true;
+            return $"{learner.LearnerName} tanuló mostantól rendelkezik KRESZ vizsgával!";
+        }
+        else
+        {
+            learner.HasTrafficPoliceExam = false;
+            return $"{learner.LearnerName} tanuló mostantól nem rendelkezik KRESZ vizsgával!";
+        }
+    }
+
     public void CreateLearner(Learner learner)
     {
         if (allLearners.Contains(learner))
@@ -228,6 +278,16 @@ public class DrivingSchool
         return instructors;
     }
 
+    public int GetTheNumberOfLearnersWithMedicalExam()
+    {
+        return allLearners.Count(x => x.HasMedicalExam == true);
+    }
+
+    public int GetTheNumberOfLearnersWithTrafficPoliceExam()
+    {
+        return allLearners.Count(x => x.HasTrafficPoliceExam == true);
+    }
+
     private int GetNumberOfLearners(List<Learner> learners)
     {
         return learners.Count;
@@ -236,6 +296,41 @@ public class DrivingSchool
     private int GetNumberOfInstructors(Dictionary<string, List<Learner>> learners)
     {
         return learners.Count;
+    }
+
+    //Filtering
+
+    public List<Learner> FilterByName(string name)
+    {
+        return allLearners.Where(x => x.LearnerName.Contains(name)).ToList();
+    }
+    public List<Learner> FilterByYear(int year)
+    {
+        return allLearners.Where(x => x.BornDate.Year == year).ToList();
+    }
+    public List<Learner> FilterByMonth(int month)
+    {
+        return allLearners.Where(x => x.BornDate.Month == month).ToList();
+    }
+    public List<Learner> FilterByDay(int day)
+    {
+        return allLearners.Where(x => x.BornDate.Day == day).ToList();
+    }
+    public List<Learner> FilterByAge(int age)
+    {
+        return allLearners.Where(x => x.Age == age).ToList();
+    }
+    public List<Learner> FilterByMotherName(string motherName)
+    {
+        return allLearners.Where(x => x.MotherName == motherName).ToList();
+    }
+    public List<Learner> FilterByMedicalExam(bool hasMedicalExam)
+    {
+        return allLearners.Where(x => x.HasMedicalExam == hasMedicalExam).ToList();
+    }
+    public List<Learner> FilterByTrafficPoliceExam(bool hasTrafficPoliceExam)
+    {
+        return allLearners.Where(x => x.HasTrafficPoliceExam == hasTrafficPoliceExam).ToList();
     }
 
     //File Handling
@@ -250,9 +345,24 @@ public class DrivingSchool
             File.AppendAllText(fullFileName, $"Oktató;{item.Key}");
             item.Value.ForEach(learner =>
                 File.AppendAllText(fullFileName,
-                    $"\nTanuló;{learner.LearnerName};{learner.Age};{learner.BornDate};{learner.MotherName}"));
+                    $"\nTanuló;{learner.LearnerName};{learner.Age};{learner.BornDate};{learner.MotherName};{learner.HasMedicalExam};{learner.HasTrafficPoliceExam}"));
             File.AppendAllText(fullFileName, "\n");
         }
+
+        Console.WriteLine($"Fájl mentése '{fullFileName}' néven sikeres!");
+    }
+
+    public void SaveLearnersToFile(string fileName)
+    {
+        string fullFileName = fileName.EndsWith(".txt") ? fileName : fileName + ".txt";
+
+        File.WriteAllText(fullFileName, "");
+
+        allLearners.ForEach(learner =>
+            File.AppendAllText(fullFileName,
+                $";{learner.LearnerName};{learner.Age};{learner.BornDate};{learner.MotherName};{learner.HasMedicalExam};{learner.HasTrafficPoliceExam}"));
+        File.AppendAllText(fullFileName, "\n");
+        
 
         Console.WriteLine($"Fájl mentése '{fullFileName}' néven sikeres!");
     }
@@ -285,7 +395,10 @@ public class DrivingSchool
                 Learner newLearner = new Learner(
                     learnerName: parts[1],
                     bornDate: DateOnly.Parse(parts[3]),
-                    motherName: parts[4]
+                    motherName: parts[4],
+                    hasMedicalExam: bool.Parse(parts[5]),
+                    hasTrafficPoliceExam: bool.Parse(parts[6]),
+                    drivedHours: int.Parse(parts[7])
                 );
 
                 CreateLearner(newLearner);
