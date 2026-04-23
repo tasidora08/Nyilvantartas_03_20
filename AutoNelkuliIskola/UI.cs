@@ -6,7 +6,10 @@ public class UI
     {
         bool fut = true;
         Console.WriteLine("Üdvözöljük az AutoNélküli Autósiskola nyilvántartásában!\n");
-        DrivingSchool iskola = new DrivingSchool("Autónélküli Autósiskola");
+        DrivingSchool iskola;
+        Console.WriteLine("Rendszerbe belépés...");
+        Console.Write("Autósiskola neve: ");
+        iskola = new DrivingSchool(Console.ReadLine());
         while (fut)
         {
             Console.Clear();
@@ -19,7 +22,8 @@ public class UI
             Console.WriteLine("[7] Oktató törlése");
             Console.WriteLine("[8] Oktató tanulóinak listája");
             Console.WriteLine("[9] Tanulók kilistázása");
-            Console.WriteLine("[] Beállítások (folyamatban...)");
+            Console.WriteLine("[F1] Adatok betöltése fájlból");
+            Console.WriteLine("[F2] Adatok mentése fájlba");
             Console.WriteLine("[Esc] Kilépés");
             Console.Write("Válasszon! ");
             ConsoleKeyInfo valasztas = Console.ReadKey();
@@ -160,15 +164,38 @@ public class UI
                     Console.WriteLine("-".PadLeft(29, '-'));
                     Console.Write("Oktató neve: ");
                     string OktatoLista = Console.ReadLine();
-                    iskola.ListLearnersOfInstructors(OktatoLista);
-                    Console.ReadKey();
+                    Console.WriteLine(iskola.ListLearnersOfInstructors(OktatoLista));
+                    Console.Write("Visszalépés - F4");
+                    ConsoleKeyInfo vissza = Console.ReadKey();
+                    if (vissza.Key == ConsoleKey.F4)
+                        break;
                     break;
 
                 case ConsoleKey.D9:
                 case ConsoleKey.NumPad9:
                     Console.WriteLine("\nTanulók kilistázása");
                     Console.WriteLine("-".PadLeft(49, '-'));
-                    iskola.GetAllLearners().ForEach(t => Console.WriteLine($"{t.LearnerName} - {t.MotherName} - {t.BornDate}"));
+                    iskola.GetAllLearners().ForEach(t => Console.WriteLine(t.LearnerName));
+                    Console.Write("Visszalépés - F4");
+                    vissza = Console.ReadKey();
+                    if (vissza.Key == ConsoleKey.F4)
+                        break;
+                    break;
+
+                case ConsoleKey.F1:
+                    Console.WriteLine("\nAdatok betöltése fájlból");
+                    Console.WriteLine("-".PadLeft(49, '-'));
+                    Console.Write("Fájl neve: ");
+                    string fajlNev = Console.ReadLine();
+                    iskola.LoadFromFile(fajlNev);
+                    break;
+
+                case ConsoleKey.F2:
+                    Console.WriteLine("\nAdatok mentése fájlba");
+                    Console.WriteLine("-".PadLeft(49, '-'));
+                    Console.Write("Fájl neve: ");
+                    string mentesFajlNev = Console.ReadLine();
+                    iskola.SaveToFile(mentesFajlNev);
                     break;
 
                 case ConsoleKey.Escape:

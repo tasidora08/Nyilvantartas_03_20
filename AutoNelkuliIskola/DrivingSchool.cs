@@ -25,7 +25,7 @@ public class DrivingSchool
     //Data Handling
     public string CreateLearner(Learner learner)
     {
-        if (allLearners.Contains(learner))
+        if (allLearners.Any(x => x.LearnerName == learner.LearnerName))
         {
             return "Ez a tanuló már létezik!";
         }
@@ -90,7 +90,7 @@ public class DrivingSchool
 
     public string AddNewLearner(string instructorName, Learner learner)
     {
-        if (allLearners.Contains(learner))
+        if (allLearners.Any(x => x.LearnerName == learner.LearnerName))
         {
             if (instructors.ContainsKey(instructorName))
             {
