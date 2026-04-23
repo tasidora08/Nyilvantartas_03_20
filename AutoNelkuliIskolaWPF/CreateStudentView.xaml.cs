@@ -1,5 +1,6 @@
 using AutoNelkuliIskola;
 using System;
+using System.ComponentModel;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
@@ -9,10 +10,13 @@ namespace AutoNelkuliIskolaWPF.UserControls
 {
     public partial class CreateStudentView : UserControl
     {
+
         public CreateStudentView()
         {
+
             InitializeComponent();
             Refresh();
+
         }
 
         public void Refresh()
@@ -40,10 +44,24 @@ namespace AutoNelkuliIskolaWPF.UserControls
                 ShowMessage("Kérjük add meg a születési dátumot!", false);
                 return;
             }
+            int.TryParse(hoursText, out int hours);
+            //if (!int.TryParse(hoursText, out int hours) || hours < 0)
+            //{
+            //    ShowMessage("A vezetett órák száma nem érvényes!", false);
+            //    return;
+            //}
+            DateTime birthDate = DpBornDate.SelectedDate.Value;
+            DateTime today = DateTime.Now;
 
-            if (!int.TryParse(hoursText, out int hours) || hours < 0)
+            int age = today.Year - birthDate.Year;
+            if (birthDate > today.AddYears(-age))
             {
-                ShowMessage("A vezetett órák száma nem érvényes!", false);
+                age--;
+            }
+
+            if (age < 16 || age > 65)
+            {
+                ShowMessage("Az életkor nem megfelelő!", false);
                 return;
             }
 
@@ -87,6 +105,22 @@ namespace AutoNelkuliIskolaWPF.UserControls
                 ? new SolidColorBrush(Color.FromRgb(34, 84, 61))
                 : new SolidColorBrush(Color.FromRgb(130, 40, 40));
             MsgBorder.Visibility = Visibility.Visible;
+        }
+
+        private void ChkKresz_Click(object sender, RoutedEventArgs e)
+        {
+            var checkbox = (CheckBox)sender;
+            if(checkbox.IsChecked == true)
+            {
+                WarningText.Visibility = Visibility.Collapsed;
+                TxtHours.IsEnabled = true;
+            }
+            else
+            {
+                WarningText.Visibility = Visibility.Visible;
+                TxtHours.IsEnabled = false;
+                TxtHours.Text = "0";
+            }
         }
     }
 }

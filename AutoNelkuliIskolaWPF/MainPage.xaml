@@ -3,6 +3,39 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       Title="MainPage">
     <Page.Resources>
+        <Style x:Key="CleanButtonStyle" TargetType="Button">
+            <Setter Property="Background" Value="#2D2D30"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Padding" Value="12,6"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}"
+                        CornerRadius="6">
+                            <ContentPresenter HorizontalAlignment="Center"
+                                      VerticalAlignment="Center"/>
+                        </Border>
+
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="#3E3E42"/>
+                            </Trigger>
+
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter Property="Background" Value="#1E1E1E"/>
+                            </Trigger>
+
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter Property="Opacity" Value="0.5"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
         <Style x:Key="NavButton" TargetType="Button">
             <Setter Property="Background" Value="Transparent"/>
             <Setter Property="Foreground" Value="#BDC3C7"/>
@@ -47,7 +80,6 @@
                 <!-- Logo / Title -->
                 <Border DockPanel.Dock="Top" Padding="16,20,16,16" BorderBrush="#2C3E50" BorderThickness="0,0,0,1">
                     <StackPanel>
-                        <TextBlock Text="🚗" FontSize="28" HorizontalAlignment="Center"/>
                         <TextBlock Text="AutoNélküli Iskola" Foreground="White" FontSize="14"
                                    FontWeight="Bold" HorizontalAlignment="Center" Margin="0,6,0,0"
                                    TextWrapping="Wrap" TextAlignment="Center"/>
@@ -56,24 +88,40 @@
 
                 <!-- Save/Load at bottom -->
                 <StackPanel DockPanel.Dock="Bottom" Margin="8,8">
-                    <Button x:Name="BtnSave" Content="💾  Mentés fájlba" Style="{StaticResource NavButton}"
-                            Click="BtnSave_Click"/>
-                    <Button x:Name="BtnLoad" Content="📂  Betöltés fájlból" Style="{StaticResource NavButton}"
-                            Click="BtnLoad_Click"/>
+
+                    <Border Height="3px" Background="Gray" Margin="5px"></Border>
+
+                    <TextBlock TextWrapping="Wrap"  Text="Automata mentés aktív!" TextAlignment="Center" Foreground="White"></TextBlock>
+                    <Button x:Name="TimeLeftIndicator" IsEnabled="False" HorizontalContentAlignment="Center" Content="{Binding Saver.RemainingSeconds}" Style="{StaticResource NavButton}"/>
+                    
+                    <Button Margin="0,0,0,10" Style="{StaticResource CleanButtonStyle}" Foreground="LightGreen" Content="START" Click="Start_Click" />
+                    <Button Style="{StaticResource CleanButtonStyle}" Foreground="MediumVioletRed" Content="STOP" Click="Stop_Click" />
+
+
                 </StackPanel>
 
                 <!-- Nav Items -->
                 <StackPanel Margin="0,12,0,0">
-                    <Button x:Name="BtnDataLists" Content="📊  Adatok áttekintése"
+                    <Button x:Name="BtnDataLists" Content="Adatok áttekintése"
                             Style="{StaticResource NavButtonActive}" Click="NavButton_Click" Tag="DataLists"/>
-                    <Button x:Name="BtnCreateInstructor" Content="➕  Oktató hozzáadása"
+                    
+                    <Border Height="3px" Background="Gray" Margin="5px"></Border>
+                    
+                    <Button x:Name="BtnCreateInstructor" Content="Oktató hozzáadása"
                             Style="{StaticResource NavButton}" Click="NavButton_Click" Tag="CreateInstructor"/>
-                    <Button x:Name="BtnCreateStudent" Content="➕  Tanuló hozzáadása"
-                            Style="{StaticResource NavButton}" Click="NavButton_Click" Tag="CreateStudent"/>
-                    <Button x:Name="BtnEditStudent" Content="✏️  Tanuló szerkesztése"
-                            Style="{StaticResource NavButton}" Click="NavButton_Click" Tag="EditStudent"/>
-                    <Button x:Name="BtnEditInstructor" Content="✏️  Oktató szerkesztése"
+                    <Button x:Name="BtnEditInstructor" Content="Oktató szerkesztése"
                             Style="{StaticResource NavButton}" Click="NavButton_Click" Tag="EditInstructor"/>
+                    <Button x:Name="BtnCreateStudent" Content="Tanuló hozzáadása"
+                            Style="{StaticResource NavButton}" Click="NavButton_Click" Tag="CreateStudent"/>
+                    <Button x:Name="BtnEditStudent" Content="Tanuló szerkesztése"
+                            Style="{StaticResource NavButton}" Click="NavButton_Click" Tag="EditStudent"/>
+
+                    <Border Height="3px" Background="Gray" Margin="5px"></Border>
+
+                    <Button x:Name="BtnSave" Content="Mentés fájlba" Style="{StaticResource NavButton}"
+        Click="BtnSave_Click"/>
+                    <Button x:Name="BtnLoad" Content="Betöltés fájlból" Style="{StaticResource NavButton}"
+        Click="BtnLoad_Click"/>
                 </StackPanel>
             </DockPanel>
         </Border>

@@ -62,9 +62,9 @@
                     <TextBox x:Name="TxtName" Style="{StaticResource FormBox}" Margin="0,0,0,20"/>
 
                     <StackPanel Orientation="Horizontal">
-                        <Button Content="✏️  Átnevezés" Style="{StaticResource PrimaryBtn}"
+                        <Button Content="Átnevezés" Style="{StaticResource PrimaryBtn}"
                                 Click="BtnRename_Click"/>
-                        <Button Content="🗑️  Oktató törlése" Style="{StaticResource DangerBtn}"
+                        <Button Content="Oktató törlése" Style="{StaticResource DangerBtn}"
                                 Click="BtnDelete_Click"/>
                     </StackPanel>
 

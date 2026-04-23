@@ -50,10 +50,10 @@
                     <!-- Mother name -->
                     <TextBlock Text="Anyja neve *" Style="{StaticResource FormLabel}"/>
                     <TextBox x:Name="TxtMotherName" Style="{StaticResource FormBox}" Margin="0,0,0,16"/>
-
                     <!-- Hours -->
                     <TextBlock Text="Vezetett órák" Style="{StaticResource FormLabel}"/>
-                    <TextBox x:Name="TxtHours" Style="{StaticResource FormBox}" Text="0" Margin="0,0,0,16"/>
+                    <TextBox x:Name="TxtHours" ToolTip="A módosításhoz KRESZ vizsga megléte szükséges!" IsEnabled="False" Style="{StaticResource FormBox}" Text="0" Margin="0,0,0,16"/>
+                    <TextBlock x:Name="WarningText" Foreground="DarkBlue" Margin="0,0,0,20" Text="A módosításhoz KRESZ vizsga megléte szükséges!"></TextBlock>
 
                     <!-- Exams -->
                     <TextBlock Text="Vizsgák" Style="{StaticResource FormLabel}"/>
@@ -61,7 +61,7 @@
                         <CheckBox x:Name="ChkMedical" Content="Egészségügyi vizsga"
                                   FontSize="13" Margin="0,0,20,0" VerticalContentAlignment="Center"/>
                         <CheckBox x:Name="ChkKresz" Content="KRESZ vizsga"
-                                  FontSize="13" VerticalContentAlignment="Center"/>
+                                  FontSize="13" VerticalContentAlignment="Center" Click="ChkKresz_Click"/>
                     </StackPanel>
 
                     <!-- Instructor assignment -->
@@ -69,7 +69,7 @@
                     <ComboBox x:Name="CmbInstructor" FontSize="13" Padding="8,7"
                               Margin="0,0,0,24"/>
 
-                    <Button Content="➕  Tanuló hozzáadása" Style="{StaticResource PrimaryBtn}"
+                    <Button Content="Tanuló hozzáadása" Style="{StaticResource PrimaryBtn}"
                             Click="BtnAdd_Click" HorizontalAlignment="Left"/>
 
                     <Border x:Name="MsgBorder" CornerRadius="6" Padding="12,10" Margin="0,16,0,0"

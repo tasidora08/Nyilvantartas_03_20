@@ -15,9 +15,15 @@ namespace AutoNelkuliIskolaWPF.Pages
 
         private Button? _activeButton;
 
+        public AutoSaver Saver { get; } = new AutoSaver();
+
         public MainPage()
         {
             InitializeComponent();
+
+            DataContext = this;
+
+            Saver.StartAutoSave();
 
             _dataListsView = new DataListsView();
             _createInstructorView = new CreateInstructorView();
@@ -27,6 +33,16 @@ namespace AutoNelkuliIskolaWPF.Pages
 
             MainContent.Content = _dataListsView;
             _activeButton = BtnDataLists;
+        }
+
+        private void Start_Click(object sender, RoutedEventArgs e)
+        {
+            Saver.StartAutoSave();
+        }
+
+        private void Stop_Click(object sender, RoutedEventArgs e)
+        {
+            Saver.StopAutoSave();
         }
 
         private void NavButton_Click(object sender, RoutedEventArgs e)

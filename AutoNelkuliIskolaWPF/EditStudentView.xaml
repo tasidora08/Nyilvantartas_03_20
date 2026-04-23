@@ -75,13 +75,14 @@
 
                     <TextBlock Text="Vezetett órák" Style="{StaticResource FormLabel}"/>
                     <TextBox x:Name="TxtHours" Style="{StaticResource FormBox}" Margin="0,0,0,14"/>
+                    <TextBlock x:Name="WarningText" Foreground="DarkBlue" Margin="0,0,0,20" Text="A módosításhoz KRESZ vizsga megléte szükséges!"></TextBlock>
 
                     <TextBlock Text="Vizsgák" Style="{StaticResource FormLabel}"/>
                     <StackPanel Orientation="Horizontal" Margin="0,0,0,14">
                         <CheckBox x:Name="ChkMedical" Content="Egészségügyi vizsga"
                                   FontSize="13" Margin="0,0,20,0" VerticalContentAlignment="Center"/>
                         <CheckBox x:Name="ChkKresz" Content="KRESZ vizsga"
-                                  FontSize="13" VerticalContentAlignment="Center"/>
+                                  FontSize="13" VerticalContentAlignment="Center" Click="ChkKresz_Click"/>
                     </StackPanel>
 
                     <TextBlock Text="Oktató módosítása" Style="{StaticResource FormLabel}"/>
@@ -89,11 +90,11 @@
 
                     <!-- Action buttons -->
                     <StackPanel Orientation="Horizontal" Margin="0,0,0,0">
-                        <Button Content="💾  Adatok frissítése" Style="{StaticResource PrimaryBtn}"
+                        <Button Content="Adatok frissítése" Style="{StaticResource PrimaryBtn}"
                                 Click="BtnUpdate_Click"/>
-                        <Button Content="🗑️  Törlés" Style="{StaticResource DangerBtn}"
+                        <Button Content="Törlés" Style="{StaticResource DangerBtn}"
                                 Click="BtnDelete_Click"/>
-                        <Button Content="🎓  Vizsgára kész?" Style="{StaticResource InfoBtn}"
+                        <Button Content="Vizsgára kész?" Style="{StaticResource InfoBtn}"
                                 Click="BtnReady_Click"/>
                     </StackPanel>
 

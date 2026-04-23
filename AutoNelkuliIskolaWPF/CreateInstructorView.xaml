@@ -45,7 +45,7 @@
                     <TextBlock Text="Oktató neve" Style="{StaticResource FormLabel}"/>
                     <TextBox x:Name="TxtName" Style="{StaticResource FormBox}" Margin="0,0,0,20"/>
 
-                    <Button Content="➕  Oktató hozzáadása" Style="{StaticResource PrimaryBtn}"
+                    <Button Content="Oktató hozzáadása" Style="{StaticResource PrimaryBtn}"
                             Click="BtnAdd_Click" HorizontalAlignment="Left"/>
 
                     <Border x:Name="MsgBorder" CornerRadius="6" Padding="12,10" Margin="0,16,0,0"

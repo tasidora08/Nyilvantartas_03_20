@@ -160,5 +160,21 @@ namespace AutoNelkuliIskolaWPF.UserControls
                 : new SolidColorBrush(Color.FromRgb(130, 40, 40));
             MsgBorder.Visibility = Visibility.Visible;
         }
+
+        private void ChkKresz_Click(object sender, RoutedEventArgs e)
+        {
+            var checkbox = (CheckBox)sender;
+            if (checkbox.IsChecked == true)
+            {
+                WarningText.Visibility = Visibility.Collapsed;
+                TxtHours.IsEnabled = true;
+            }
+            else
+            {
+                WarningText.Visibility = Visibility.Visible;
+                TxtHours.IsEnabled = false;
+                TxtHours.Text = "0";
+            }
+        }
     }
 }

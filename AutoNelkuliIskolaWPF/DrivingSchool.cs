@@ -345,7 +345,7 @@ public class DrivingSchool
             File.AppendAllText(fullFileName, $"Oktató;{item.Key}");
             item.Value.ForEach(learner =>
                 File.AppendAllText(fullFileName,
-                    $"\nTanuló;{learner.LearnerName};{learner.Age};{learner.BornDate};{learner.MotherName};{learner.HasMedicalExam};{learner.HasTrafficPoliceExam}"));
+                    $"\nTanuló;{learner.LearnerName};{learner.Age};{learner.BornDate};{learner.MotherName};{learner.HasMedicalExam};{learner.HasTrafficPoliceExam};{learner.DrivedHours}"));
             File.AppendAllText(fullFileName, "\n");
         }
 

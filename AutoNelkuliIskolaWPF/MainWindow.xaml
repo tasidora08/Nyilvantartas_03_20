@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AutoNelkuliIskolaWPF"
         mc:Ignorable="d"
-        Title="AutoNelkuliIskola" Height="450" Width="800" WindowState="Maximized" WindowStyle="None">
+        Title="AutoNelkuliIskola" Height="450" Width="800" WindowState="Maximized" WindowStyle="SingleBorderWindow">
     <Grid>
         <Frame x:Name="MainFrame" />
     </Grid>
