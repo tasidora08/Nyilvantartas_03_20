@@ -56,14 +56,14 @@ public class UI
                     {
                         egeszsegugyi = true;
                     }
-                    Console.Write("KRESZ vizsgával rendelkezik? (I/N) ");
+                    Console.Write("\nKRESZ vizsgával rendelkezik? (I/N) ");
                     ConsoleKeyInfo valasztasK = Console.ReadKey();
                     bool kresz = false;
                     if (valasztasK.Key == ConsoleKey.I)
                     {
                         kresz = true;
                     }
-                    Console.Write("Eddig vezetett órák száma: ");
+                    Console.Write("\nEddig vezetett órák száma: ");
                     int vezetettOrak = Convert.ToInt32(Console.ReadLine());
                     Learner tanulo = new Learner(nev, szuletes, anyjaNeve, egeszsegugyi, kresz, vezetettOrak);
                     iskola.CreateLearner(tanulo);
