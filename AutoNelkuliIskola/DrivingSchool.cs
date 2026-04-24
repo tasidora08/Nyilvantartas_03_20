@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text;
 
 namespace AutoNelkuliIskola;
 
@@ -254,22 +255,48 @@ public class DrivingSchool
 
 
     //List Methods
-    public void ListLearnersOfInstructors(string instructorName)
+
+    public List<Learner> GetAllLearners()
     {
-        if (instructors.ContainsKey(instructorName))
+        return allLearners;
+    }
+
+    public Learner GetLearnerByName(string learnerName)
+    {
+        return allLearners.Where(x => x.LearnerName == learnerName).First();
+    }
+
+    public List<string> GetAllInstructors()
+    {
+        return instructors.Keys.ToList();
+    }
+    public string ListLearnersOfInstructors(string instructorName)
+    {
+        if (!instructors.ContainsKey(instructorName))
         {
-            if (instructors[instructorName].Count == 0)
-            {
-                Console.WriteLine($"'{instructorName}' oktató nem rendelkezik tanulóval!");
-            }
-            else
-            {
-                Console.WriteLine(instructorName + " tanulói: ");
-                Console.WriteLine(new string('-', 30));
-                instructors[instructorName].ForEach(learner =>
-                    Console.WriteLine($"Név: {learner.LearnerName} \nÉletkor: {learner.Age} \nSzül. Dátum: {learner.BornDate} \nAnyja neve: {learner.MotherName}\n{new string('-', 30)}"));
-            }
+            return $"Nincs ilyen nevű oktató: {instructorName}";
         }
+
+        if (instructors[instructorName].Count == 0)
+        {
+            return $"'{instructorName}' oktató nem rendelkezik tanulóval!";
+        }
+
+        var sb = new StringBuilder();
+
+        sb.AppendLine(instructorName + " tanulói:");
+        sb.AppendLine(new string('-', 30));
+
+        instructors[instructorName].ForEach(learner =>
+        {
+            sb.AppendLine($"Név: {learner.LearnerName}");
+            sb.AppendLine($"Életkor: {learner.Age}");
+            sb.AppendLine($"Szül. Dátum: {learner.BornDate}");
+            sb.AppendLine($"Anyja neve: {learner.MotherName}");
+            sb.AppendLine(new string('-', 30));
+        });
+
+        return sb.ToString();
     }
 
     public Dictionary<string, List<Learner>> ListAllInstructorsWithLearners()
