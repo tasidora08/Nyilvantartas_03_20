@@ -49,7 +49,23 @@ public class UI
                     }
                     Console.Write("Tanuló anyja neve: ");
                     string anyjaNeve = Console.ReadLine();
-                    Learner tanulo = new Learner(nev, szuletes, anyjaNeve);
+                    Console.Write("Egészségügyi vizsgával rendelkezik? (I/N) ");
+                    ConsoleKeyInfo valasztasE = Console.ReadKey();
+                    bool egeszsegugyi = false;
+                    if (valasztasE.Key == ConsoleKey.I)
+                    {
+                        egeszsegugyi = true;
+                    }
+                    Console.Write("KRESZ vizsgával rendelkezik? (I/N) ");
+                    ConsoleKeyInfo valasztasK = Console.ReadKey();
+                    bool kresz = false;
+                    if (valasztasK.Key == ConsoleKey.I)
+                    {
+                        kresz = true;
+                    }
+                    Console.Write("Eddig vezetett órák száma: ");
+                    int vezetettOrak = Convert.ToInt32(Console.ReadLine());
+                    Learner tanulo = new Learner(nev, szuletes, anyjaNeve, egeszsegugyi, kresz, vezetettOrak);
                     iskola.CreateLearner(tanulo);
                     break;
 
