@@ -5,7 +5,7 @@ public class UI
     public static void MainMenu()
     {
         bool fut = true;
-        Console.WriteLine("Üdvözöljük az AutoNélküli Autósiskola nyilvántartásában!\n");
+        Console.WriteLine("Üdvözöljük a nyilvántartásunkban!\n");
         DrivingSchool iskola;
         Console.WriteLine("Rendszerbe belépés...");
         Console.Write("Autósiskola neve: ");
